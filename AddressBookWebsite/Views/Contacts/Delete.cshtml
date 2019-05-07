@@ -1,0 +1,118 @@
+﻿@model AddressBookWebsite.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Are you sure you want to delete this record?";
+}
+
+<h1 style="font-family:Cambria">@ViewBag.Title</h1>
+<head>
+    <script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/kendo/kendo.all.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/respond.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="~/Content/errorPage.css" type="text/css" />
+</head>
+<title></title>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContactID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+        <dd>
+            @if (Model.Avatar != null)
+            {
+                <img src="@Url.Content(Model.Avatar)" />
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressOne)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressOne)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressTwo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressTwo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

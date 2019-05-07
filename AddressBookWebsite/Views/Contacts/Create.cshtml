@@ -1,0 +1,111 @@
+﻿@model AddressBookWebsite.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Add New Contact";
+}
+
+<h2 style="font-family:'Book Antiqua'">@ViewBag.Title</h2>
+
+<head>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.all.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/respond.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="~/Content/web/kendo.common.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/web/kendo.default.min.css" type="text/css" />
+    <link href="~/Content/errorPage.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/textbox.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/validator.css" rel="stylesheet" />
+</head>
+<title></title>
+
+@Html.ValidationSummary()
+@using (Html.BeginForm("Create", "Contacts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="profile">
+            <div class="profile-avatar-wrap">
+                <img src="~/img/256.jpg" id="profile-avatar" alt="Image for Profile">
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group">
+                    <input style="cursor:pointer" accept=".jpg,.jpeg, .png,|images/*" value="Upload Photo" type="file" id="uploader" name="imageOne" class="btn btn-primary">
+                </div>
+                <script src="~/Scripts/avatar.js" type="text/javascript"></script>
+                <script src="~/Scripts/resample.js" type="text/javascript"></script>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "textbox" } } )
+                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "validator" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "textbox" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "validator" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Gender, new SelectList(new[] { "MALE", "FEMALE" }))
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AddressOne, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.AddressOne, new { @class = "required", @cols = 120, @rows = 10 })
+                        @Html.ValidationMessageFor(model => model.AddressOne, "", new { @class = "validator" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AddressTwo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.AddressTwo, new { @cols = 120, @rows = 10 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "textbox", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "validator" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "textbox", @maxlength = "15" } })
+                        @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "validator" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "textbox" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validator" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

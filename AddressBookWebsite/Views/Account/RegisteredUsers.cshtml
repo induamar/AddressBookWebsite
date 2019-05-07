@@ -1,0 +1,100 @@
+﻿@model IEnumerable<AddressBookWebsite.Models.CreateUserRoleViewModel>
+
+@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<h2 style="font-family:'Book Antiqua'">@ViewBag.Title</h2>
+<img src="~/img/settings.png" width="150" height="150" />
+
+<script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+<script src="~/Scripts/kendo/kendo.all.min.js" type="text/javascript"></script>
+<script src="~/Scripts/respond.min.js" type="text/javascript"></script>
+<script src="~/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="~/Content/web/kendo.common.min.css" type="text/css" />
+<link rel="stylesheet" href="~/Content/web/kendo.default.min.css" type="text/css" />
+<link href="~/Content/errorPage.css" rel="stylesheet" />
+
+<table id="list-grid" class="table table-bordered">
+    <tr style="background-color:beige">
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            Delete User
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "Remove", new { id = item.UserID })
+            </td>
+        </tr>
+    }
+</table>
+<script>
+    $("#list-grid").kendoGrid(
+        {
+            dataSource: {
+                pageSize: 5
+            },
+
+            pageable: true,
+            scrollable: true,
+            resizable: true,
+            dataBound: onDataBound,
+        });
+
+    function onDataBound() {
+        var grid = $("#list-grid").data("kendoGrid");
+        for (var i = 0; i < grid.columns.length; i++) {
+            grid.autoFitColumn(i);
+        }
+    }
+</script>
+<br />
+<img src="~/img/lock.png" align="middle" />
+<button class="btn btn-primary" width="55" height="55" onclick="location.href='@Url.Action("CreateUserRole", "Account")'">Register User</button>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
